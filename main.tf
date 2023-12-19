@@ -26,7 +26,7 @@ module "container_k3s_database" {
   profiles     = var.container_profiles
   nicparent    = var.nicparent
   mount_dirs   = concat(local.local_mount_dirs, var.mount_dirs)
-  exec = [
+  exec = concat(each.value.exec, [
     {
       entrypoint = "/mnt/install-database.sh"
       environment = merge(null_resource.container_environment.triggers, {
@@ -37,7 +37,7 @@ module "container_k3s_database" {
         MYSQL_ROOT_PASSWORD = var.mysql_root_password
       })
     }
-  ]
+  ])
 }
 
 module "container_k3s_loadbalancer" {
@@ -49,14 +49,14 @@ module "container_k3s_loadbalancer" {
   profiles     = var.container_profiles
   nicparent    = var.nicparent
   mount_dirs   = concat(local.local_mount_dirs, var.mount_dirs)
-  exec = [
+  exec = concat(each.value.exec, [
     {
       entrypoint = "/mnt/install-loadbalancer.sh"
       environment = merge(null_resource.container_environment.triggers, {
         RANDOM_STRING = random_id.rng.hex
       })
     }
-  ]
+  ])
 }
 
 module "container_k3s_master" {
@@ -68,7 +68,7 @@ module "container_k3s_master" {
   profiles     = concat(var.container_profiles, [local.profile_privileged_name])
   nicparent    = var.nicparent
   mount_dirs   = concat(local.local_mount_dirs, var.mount_dirs)
-  exec = [
+  exec = concat(each.value.exec, [
     {
       entrypoint = "/mnt/install-master.sh"
       environment = merge(null_resource.container_environment.triggers, {
@@ -79,7 +79,7 @@ module "container_k3s_master" {
         K3S_TOKEN          = var.k3s_token
       })
     }
-  ]
+  ])
   depends_on = [
     module.container_k3s_database,
     module.container_k3s_loadbalancer,
@@ -96,7 +96,7 @@ module "container_k3s_worker" {
   profiles     = concat(var.container_profiles, [local.profile_privileged_name])
   nicparent    = var.nicparent
   mount_dirs   = concat(local.local_mount_dirs, var.mount_dirs)
-  exec = [
+  exec = concat(each.value.exec, [
     {
       entrypoint = "/mnt/install-worker.sh"
       environment = merge(null_resource.container_environment.triggers, {
@@ -104,7 +104,7 @@ module "container_k3s_worker" {
         K3S_TOKEN     = var.k3s_token
       })
     }
-  ]
+  ])
   depends_on = [
     module.container_k3s_loadbalancer,
     module.container_k3s_master,

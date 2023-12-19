@@ -28,6 +28,10 @@ variable "nicparent" {
 variable "containers" {
   type = map(map(object({
     ipv4_address = string
+    exec = list(object({
+      entrypoint  = string
+      environment = map(any)
+    }))
   })))
 }
 
