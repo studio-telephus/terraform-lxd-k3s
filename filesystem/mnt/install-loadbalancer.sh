@@ -6,8 +6,7 @@
 
 # env > /tmp/env.out
 
-apt-get update
-apt-get install -y vim curl htop gnupg2 netcat-traditional openssl net-tools haproxy
+apt-get install -y curl gnupg2 netcat-traditional openssl net-tools haproxy
 
 # sleep 10
 cp -pr /etc/haproxy/haproxy.cfg /etc/haproxy/haproxy.cfg.orig

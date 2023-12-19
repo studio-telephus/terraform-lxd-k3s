@@ -8,8 +8,7 @@
 
 # env > /tmp/env.out
 
-apt-get update
-apt-get install -y lsb-release vim htop openssl wget dirmngr netcat
+apt-get install -y lsb-release openssl wget dirmngr netcat
 
 ## MySQL
 wget -O /tmp/mysql-apt-config.deb https://repo.mysql.com/mysql-apt-config_0.8.26-1_all.deb
