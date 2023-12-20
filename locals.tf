@@ -1,7 +1,7 @@
 locals {
   profile_privileged_name = "k3s-privileged-${var.env}"
   local_mount_dirs = [
-    "${path.cwd}/filesystem",
+    "${path.module}/filesystem",
   ]
   env_ipv4_addresses = flatten([for ctype, cmap in var.containers :
     flatten(
