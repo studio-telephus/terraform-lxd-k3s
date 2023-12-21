@@ -6,6 +6,7 @@
 
 # env > /tmp/env.out
 
+apt-get update
 apt-get install -y curl gnupg2 netcat-traditional openssl net-tools haproxy
 
 # sleep 10

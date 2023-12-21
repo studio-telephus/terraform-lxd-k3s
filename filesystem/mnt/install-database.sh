@@ -8,6 +8,7 @@
 
 # env > /tmp/env.out
 
+apt-get update
 apt-get install -y lsb-release openssl wget dirmngr netcat
 
 ## MySQL

@@ -1,5 +1,5 @@
 module "container" {
-  source    = "github.com/studio-telephus/terraform-lxd-instance.git?ref=main"
+  source    = "github.com/studio-telephus/terraform-lxd-instance.git?ref=1.0.0"
   name      = var.name
   profiles  = var.profiles
   image     = var.image

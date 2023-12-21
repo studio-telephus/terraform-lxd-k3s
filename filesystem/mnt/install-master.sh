@@ -9,6 +9,7 @@
 
 # env > /tmp/env.out
 
+apt-get update
 apt-get install -y openssl curl
 
 export K3S_DATASTORE_ENDPOINT="mysql://$MYSQL_K3S_USERNAME:$MYSQL_K3S_PASSWORD@tcp($CONTAINER_K3S_MYSQL_IP:3306)/$MYSQL_K3S_DATABASE"
